@@ -17,9 +17,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->group(function (){
 
-Route::get('change-password','ProfileController@editPassword')
-    ->name('profile.show_password_form');
-Route::put('change-password','ProfileController@updatePassword')
-    ->name('profile.update_password');
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/userlist', 'UserlistController@index')
+        ->name('userlist')
+        ->middleware('is.admin');
+    Route::get('change-password','ProfileController@editPassword')
+        ->name('profile.show_password_form');
+    Route::put('change-password','ProfileController@updatePassword')
+        ->name('profile.update_password');
+
+});
+
+

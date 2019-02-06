@@ -63,7 +63,11 @@
                                     <a class="dropdown-item" href="{{ route('profile.show_password_form') }}">
                                         {{ __('Change password') }}
                                     </a>
-
+                                    @if (Auth::user()->is_admin === 1)
+                                    <a class="dropdown-item" href="{{ route('userlist') }}">
+                                        {{ __('Userlist') }}
+                                    </a>
+                                    @endif
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
